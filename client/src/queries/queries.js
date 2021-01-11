@@ -31,6 +31,7 @@ const ADD_MOVIE = gql`
 const GET_MOVIE = gql`
     query getMovie($id: ID!) {
         movie(id: $id) {
+            id
             name
             genre
             director {
