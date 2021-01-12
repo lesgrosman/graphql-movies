@@ -8,14 +8,12 @@ const client = new ApolloClient({
   cache: new InMemoryCache()
 })
 
-const App = () => {
+const App: React.FC = () => {
   return (
-    <ApolloProvider client={client}>
-      <div>
-        <h1>Hello</h1>
-        <MovieList/>
-        <AddMovie/>
-      </div>
+    <ApolloProvider client={client}>     
+          <h1>Your Movie List</h1>
+          <MovieList/>
+          <AddMovie/>
     </ApolloProvider>
 
 

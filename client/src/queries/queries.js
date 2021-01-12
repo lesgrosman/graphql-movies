@@ -4,6 +4,7 @@ const GET_DIRECTORS = gql`
     query getDirectors {
         directors {
             name
+            age
             id
         }
     }

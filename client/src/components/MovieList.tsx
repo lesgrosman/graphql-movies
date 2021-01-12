@@ -2,30 +2,7 @@ import React from 'react'
 import { useQuery, useLazyQuery } from '@apollo/client'
 import MovieDetail from './MovieDetail'
 import { GET_MOVIES, GET_MOVIE } from '../queries/queries'
-
-interface Movie {
-    id: string,
-    name: string,
-    genre: string
-    director: {
-        name: string
-        age: number
-    }
-}
-
-interface MovieVars {
-    id: string
-}
-
-interface MoviesData {
-    movies: Movie[]
-}
-
-interface MovieObject {
-    loading: boolean,
-    error: any,
-    data: any
-}
+import { Movie, MovieVars, MoviesData, MovieObject } from '../interfaces/interfaces'
 
 
 const MovieList:React.FC = () => {
@@ -39,24 +16,24 @@ const MovieList:React.FC = () => {
         data: movie_data.data!
     }
 
-    console.log(movie_data)
     if (!data) return null
     if (loading) return <span>Loading</span>
     if (error) return <span>Error</span>
 
     return (
         <div>
-            <ul>
+            <ul className="list">
                 {data!.movies.map((movie: Movie) => {
                     return (
                         <li key={movie.id} onClick={() => getMovie({variables: {id: movie.id}})}>
-                            {movie.name}({movie.genre})
+                            {movie.name}
                         </li>
                     )
                 })}
             </ul>
-            <MovieDetail movieData={movieObject}/>
-            <h1>List</h1>
+            <div className="details">
+                <MovieDetail movieData={movieObject}/>
+            </div>
         </div>
     )
 }

@@ -1,29 +1,7 @@
 import React from 'react'
+import { Movie, MovieDetailProps } from '../interfaces/interfaces'
 
-interface Movie {
-    id: string,
-    name: string,
-    genre: string,
-    director: {
-        name: string,
-        age: number
-        movies: Movie[]
-    }
-}
-
-interface Props {
-    movieData: {
-        loading: boolean,
-        error: any,
-        data: any
-    }
-}
-
-interface Data {
-    movie: Movie
-}
-
-const MovieDetail: React.FC<Props> = ({ movieData }) => {
+const MovieDetail: React.FC<MovieDetailProps> = ({ movieData }) => {
    
     const {loading, error, data} = movieData
 
@@ -34,19 +12,19 @@ const MovieDetail: React.FC<Props> = ({ movieData }) => {
     const { movie }: {movie: Movie} = data
 
     return (
-        <div> 
-            <h2>{movie.name}</h2>
-            <h4>{movie.genre}</h4>
-            <h4>{movie.director.name}</h4>
+        <> 
+            <h1>{movie.name}</h1>
+            <h5>{movie.genre}</h5>
+            <h5>{movie.director.name}</h5>
+            <h5>Other movies by this director:</h5>
             <ul>
                 {movie.director.movies.map((movie: Movie) => {
                     return (
-                        <li key={movie.id}>{movie.name}</li>
+                        <li className="title" key={movie.id}>{movie.name}</li>
                     )
                 })}
             </ul>
-
-        </div>
+        </>
     )
 }
 
